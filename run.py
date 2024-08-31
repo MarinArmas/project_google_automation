@@ -9,7 +9,7 @@ def process_file(file_path, image):
             lines = f.readlines()
 
             # Ensure that there are enough lines in the file
-            if len(lines) < 4:
+            if len(lines) < 3:
                 print(f"Skipping file {file_path}: Not enough data")
                 return None
 
@@ -38,14 +38,15 @@ def send_post_request(fruits_dict):
 
 def main():
     # Change the directory
-    directory = './data'
+    directory = './txt'
     for filename in os.listdir(directory):
         file_path = os.path.join(directory, filename)
         image = os.path.splitext(filename)[0] + ".jpeg"
         if os.path.isfile(file_path):
-            feedback_dict = process_file(file_path, image)
-            if feedback_dict:  # Check if processing was successful
-                send_post_request(feedback_dict)
+            fruits_dict = process_file(file_path, image)
+            if fruits_dict:  # Check if processing was successful
+                send_post_request(fruits_dict)
+                # print(fruits_dict)
 
 if __name__ == "__main__":
     main()
