@@ -28,12 +28,12 @@ def list_images_in_directory(directory):
 
     return image_files
 
-# Example usage
-directory_path = '~/supplier-data/images'
+# Change the images path
+directory_path = './'
 image_list = list_images_in_directory(directory_path)
 
 print("Image files found in the directory:")
 for image in image_list:
-    
-    with Image.open(os.path.join(directory_path, image)) as img:
-        img.resize((600,400)).save(os.path.join(directory_path, image), "TIFF")
+    image_path = os.path.join(directory_path, image)
+    with Image.open(image_path) as img:
+        img.resize((600,400)).save(image_path.rstrip(".tiff") + ".jpeg", "JPEG")
